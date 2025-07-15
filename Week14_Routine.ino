@@ -1,71 +1,69 @@
-#include <Wire.h>
-#include <WiFi.h>
-#include <LiquidCrystal_I2C.h>
-LiquidCrystal_I2C lcd(0x27, 16, 2); 
+#include<Wire.h>
+#include<WiFi.h>
+#include<LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-String Dates[] = 
+String dates[] =
 {
-  "Sun, 20 Jul 2025",
-  "Mon, 21 Jul 2025",
-  "Tue, 22 Jul 2025",
-  "Wed, 23 Jul 2025",
-  "Wed, 23 Jul 2025",
-  "Thu, 24 Jul 2025",
-  "Thu, 24 Jul 2025",
-  "Thu, 24 Jul 2025",
+  "Sun, 20 Jul",
+  "Mon, 21 Jul",
+  "Tue, 22 Jul",
+  "Wed, 23 Jul",
+  "Wed, 23 Jul",
+  "Thu, 24 Jul",
+  "Thu, 24 Jul",
+  "Thu, 24 Jul",
 };
 
-String Task[] = 
+String tasks[] =
 {
   "Algo Quiz",
   "NM Lab Final",
-  "Regular Classes",
+  "Regular Class",
   "Algo Lab Final",
-  "NM Assign Due",
   "Math Assign Due",
+  "NM Assign Due",
   "GED Assign Due",
   "Math CT"
 };
 
 
-int TotalTasks = 8;
+int n = 8;
 
-void setup() 
+void setup()
 {
   lcd.init();
   lcd.backlight();
 
-  lcd.setCursor(0, 0);
   lcd.print("WiFi Scanning...");
   delay(1000);
 
-  int n = WiFi.scanNetworks();
+  int x = WiFi.scanNetworks();
 
   lcd.clear();
-  if (n == 0) 
+  if(x==0)
   {
-    lcd.setCursor(0, 0);
-    lcd.print("No WiFi Found");
+    lcd.setCursor(0,0);
+    lcd.print("No WiFi found");
     delay(1000);
   }
 
   lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Week 14");
-  lcd.setCursor(0, 1);
-  delay(1000);
+  lcd.setCursor(0,0);
+  lcd.print("14th Week Tasks ");
+  delay(2000);
 }
 
-void loop() 
+void loop()
 {
-  for (int i = 0; i < TotalTasks; i++) 
+  for(int i=0; i<n;i++)
   {
     lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print(Dates[i]);
+    lcd.setCursor(0,0);
+    lcd.print(dates[i]);
 
-    lcd.setCursor(0, 1);
-    lcd.print(Task[i]);
-    delay(2000);
+    lcd.setCursor(0,1);
+    lcd.print(tasks[i]);
+    delay(3000);
   }
 }
